@@ -25,6 +25,7 @@ document.querySelectorAll('.reveal').forEach((element) => observer.observe(eleme
 const slider = document.querySelector('[data-slider]');
 if (slider) {
   const slides = [...slider.querySelectorAll('.legacy-slide')];
+  const thumbs = [...document.querySelectorAll('[data-slide-to]')];
   let current = 0;
   let timer;
 
@@ -32,6 +33,7 @@ if (slider) {
     slides[current]?.classList.remove('is-active');
     current = (next + slides.length) % slides.length;
     slides[current]?.classList.add('is-active');
+    thumbs.forEach((thumb, index) => thumb.classList.toggle('is-active', index === current));
   };
   const restart = () => {
     window.clearInterval(timer);
@@ -40,5 +42,6 @@ if (slider) {
 
   slider.querySelector('[data-slide-prev]')?.addEventListener('click', () => { show(current - 1); restart(); });
   slider.querySelector('[data-slide-next]')?.addEventListener('click', () => { show(current + 1); restart(); });
+  thumbs.forEach((thumb) => thumb.addEventListener('click', () => { show(Number(thumb.dataset.slideTo)); restart(); }));
   restart();
 }

@@ -170,24 +170,32 @@ home_body = <<~HTML
       <button class="slider-arrow slider-arrow--prev" type="button" data-slide-prev aria-label="前の画像">‹</button>
       <button class="slider-arrow slider-arrow--next" type="button" data-slide-next aria-label="次の画像">›</button>
     </div>
+    <div class="slider-thumbs" aria-label="スライドを選択">
+      <button class="is-active" type="button" data-slide-to="0"><img src="/uploads/2025/05/UNICCUP3.jpeg" alt=""></button>
+      <button type="button" data-slide-to="1"><img src="/uploads/2025/05/UNICCUP1.001.jpeg" alt=""></button>
+      <button type="button" data-slide-to="2"><img src="/uploads/2025/05/UNICCUP2.001.jpeg" alt=""></button>
+    </div>
   </section>
 
-  <section id="event" class="event-band">
-    <h1>GAME INFORMATION</h1>
-    <h2>第3回Unic Cup開催決定！！</h2>
-    <p>#{h(site['event_date'])} #{h(site['event_place'])}にて開催いたします。</p>
-    <a class="legacy-button" href="#{h(site['event_link'])}">詳細はこちら</a>
+  <section id="event" class="schedule-section">
+    <div class="section-title"><h2>EVENT SCHEDULE</h2><p>大会・イベント情報</p></div>
+    <div class="schedule-track">
+      <article class="schedule-card schedule-card--next"><p class="schedule-label">NEXT EVENT</p><div class="schedule-date"><strong>10.10</strong><span>SAT<br>2026</span></div><h3>第3回ユニックカップ<br>U-9 サッカー大会</h3><p>#{h(site['event_place'])}</p><a href="#{h(site['event_link'])}">大会情報</a></article>
+      <article class="schedule-card"><p class="schedule-label">EVENT REPORT</p><div class="schedule-date"><strong>3.28</strong><span>SAT<br>2026</span></div><h3>第2回ユニックカップ</h3><p>Smile Sports Park</p><a href="/第2回ユニック杯開催/">開催レポート</a></article>
+      <article class="schedule-card"><p class="schedule-label">EVENT REPORT</p><div class="schedule-date"><strong>5.03</strong><span>SAT<br>2025</span></div><h3>第1回ユニックカップ<br>U-9 サッカー大会</h3><p>フッティーパーク印西</p><a href="/post-2/">開催レポート</a></article>
+    </div>
   </section>
 
   <section class="section home-section">
-    <div class="legacy-heading reveal"><h2><span>|</span> NEWS</h2></div>
+    <div class="section-title reveal"><h2>NEWS</h2><p>最新のお知らせ</p></div>
     <div class="card-grid">#{latest_news}</div>
     <div class="center"><a class="legacy-button legacy-button--navy" href="/news/">一覧を見る</a></div>
   </section>
 
   <section class="mission">
+    <div class="mission-photo"><img src="/uploads/2025/09/77EC4AAA-FE18-43C8-A38E-4D7862A732C4.jpg" alt="サッカーを楽しむ子どもたち" loading="lazy"></div>
     <div class="mission-copy reveal">
-      <h2>WE SUPPORT THE FUTURE!!</h2>
+      <div class="section-title"><h2>OUR MISSION</h2><p>NCPについて</p></div>
       <h3>サッカーをこよなく愛する少年少女のため</h3>
       <p>イベントの企画・制作・運営を一貫してサポートいたします。<br>各試合の運営や動画・グッズ制作などのお声にお応えいたします。</p>
       <a class="legacy-button legacy-button--navy" href="/we-are/">詳しく見る</a>
@@ -195,7 +203,7 @@ home_body = <<~HTML
   </section>
 
   <section class="section home-section">
-    <div class="legacy-heading reveal"><h2><span>|</span> TOPIC</h2></div>
+    <div class="section-title reveal"><h2>TOPICS</h2><p>人とチームのストーリー</p></div>
     <div class="card-grid">#{latest_topics}</div>
     <div class="center"><a class="legacy-button legacy-button--navy" href="/topic/">一覧を見る</a></div>
   </section>

@@ -128,3 +128,95 @@ button { font: inherit; }
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Compact sports-club layout */
+body { overflow-x: hidden; background: #fff; }
+.site-header { position: sticky; top: 0; box-shadow: 0 1px 0 rgba(255,255,255,.12); }
+.header-inner { flex-direction: row; justify-content: flex-start; max-width: none; min-height: 64px; padding: 0 22px; }
+.brand { flex: 0 0 auto; width: 108px; height: 54px; margin: 0 34px 0 0; }
+.brand img { object-position: left center; }
+.site-nav { flex: 1; justify-content: flex-start; gap: clamp(20px, 2.3vw, 38px); font-size: .76rem; letter-spacing: .035em; }
+.site-nav a { padding: 22px 0 19px; }
+.site-nav a::after { height: 4px; }
+.nav-contact { margin-left: auto; padding-right: 18px !important; padding-left: 18px !important; background: var(--red); }
+.nav-contact::after { display: none; }
+.nav-contact:hover { color: white !important; background: #d90000; }
+.legacy-hero { padding: 0; background: #070b1c; }
+.legacy-slider { width: min(100%, 1240px); aspect-ratio: 16/7.45; box-shadow: none; }
+.legacy-slide { object-fit: cover; }
+.slider-arrow { width: 44px; height: 70px; background: rgba(0,10,110,.82); border-radius: 4px; font-size: 2.4rem; }
+.slider-thumbs { display: flex; gap: 7px; justify-content: center; min-height: 58px; padding: 8px 20px; background: white; }
+.slider-thumbs button { width: 92px; height: 42px; padding: 0; overflow: hidden; background: #ddd; border: 3px solid transparent; border-radius: 4px; cursor: pointer; }
+.slider-thumbs button.is-active { border-color: var(--red); }
+.slider-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.section-title { max-width: 1120px; margin: 0 auto 34px; }
+.section-title h2 { position: relative; margin: 0; padding-left: 17px; color: var(--navy); font-size: clamp(2.6rem, 5vw, 4.25rem); font-weight: 800; line-height: .92; letter-spacing: -.035em; }
+.section-title h2::before { position: absolute; top: 2px; bottom: 1px; left: 0; width: 7px; content: ""; background: var(--red); }
+.section-title p { margin: 10px 0 0 18px; color: #777b88; font-size: .74rem; font-weight: 700; letter-spacing: .12em; }
+.schedule-section { padding: 76px 0 88px; overflow: hidden; background: #f0f1f7; }
+.schedule-track { display: grid; grid-template-columns: repeat(3, minmax(280px, 1fr)); gap: 18px; max-width: 1120px; margin: auto; padding: 0 30px; }
+.schedule-card { position: relative; display: flex; flex-direction: column; min-height: 345px; padding: 24px; background: white; border-top: 5px solid var(--navy); box-shadow: 0 5px 18px rgba(0,10,90,.06); }
+.schedule-card--next { border-color: var(--red); }
+.schedule-label { margin: 0; color: var(--red); font-size: .65rem; font-weight: 800; letter-spacing: .11em; }
+.schedule-date { display: flex; align-items: center; margin: 6px 0 10px; color: var(--navy); }
+.schedule-date strong { font-size: clamp(2.6rem, 4vw, 4rem); line-height: 1; letter-spacing: -.06em; }
+.schedule-date span { margin-left: 10px; font-size: .66rem; font-weight: 800; line-height: 1.35; }
+.schedule-card h3 { margin: 8px 0; color: var(--navy); font-size: 1.08rem; line-height: 1.55; }
+.schedule-card > p:not(.schedule-label) { margin: 0; color: #666b76; font-size: .78rem; }
+.schedule-card > a { margin-top: auto; padding: 12px; color: white; background: var(--navy); font-size: .75rem; font-weight: 700; text-align: center; }
+.schedule-card--next > a { background: linear-gradient(90deg, var(--navy), var(--red)); }
+.section { max-width: 1180px; padding: 92px 30px; }
+.home-section { padding-top: 92px; }
+.home-section .card-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.card { border-radius: 3px; box-shadow: 0 2px 10px rgba(0,10,90,.1); }
+.card-copy { min-height: 180px; padding: 17px; }
+.card-media span { top: auto; bottom: 0; left: 0; border-radius: 0; }
+.legacy-button { border-radius: 3px; }
+.mission { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); min-height: 500px; padding: 0; background: #f0f1f7; text-align: left; }
+.mission-photo { height: 100%; min-height: 500px; overflow: hidden; }
+.mission-photo img { width: 100%; height: 100%; object-fit: cover; }
+.mission-copy { max-width: 620px; padding: 72px clamp(32px, 6vw, 86px); }
+.mission-copy .section-title { margin-bottom: 32px; }
+.mission h3 { color: var(--navy); font-size: 1.25rem; }
+.mission .legacy-button { border: 0; }
+.social-section { max-width: 1180px; padding: 92px 30px; }
+.social-section h2 { position: relative; padding-left: 16px; font-size: 1.8rem; font-weight: 800; }
+.social-section h2::before { position: absolute; top: 3px; bottom: 3px; left: 0; width: 6px; content: ""; background: var(--red); }
+.site-footer { background: #02075b; }
+
+@media (max-width: 980px) {
+  .site-nav { gap: 18px; }
+  .home-section .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 1100px) {
+  .site-header { position: sticky; }
+  .header-inner { min-height: 66px; padding: 0 16px; }
+  .brand { width: 104px; height: 52px; }
+  .menu-button { position: absolute; z-index: 3; top: 11px; right: 16px; display: block !important; width: 44px; height: 44px; margin: 0; }
+  .menu-button::before { display: block; color: white; content: "MENU"; font-size: .62rem; font-weight: 800; letter-spacing: .08em; }
+  .menu-button > span:not(.sr-only) { display: none; }
+  .site-nav { position: absolute; top: 66px; left: 0; display: none; flex-direction: column; align-items: stretch; width: 100%; gap: 0; padding: 16px 24px 24px; background: var(--navy); }
+  .site-nav.is-open { display: flex; }
+  .site-nav a { padding: 12px 0; }
+  .nav-contact { margin: 8px 0 0; padding: 12px !important; text-align: center; }
+  .legacy-slider { aspect-ratio: 1/1.08; }
+  .legacy-slide { object-fit: cover; }
+  .slider-thumbs { justify-content: flex-start; overflow-x: auto; }
+  .slider-thumbs button { flex: 0 0 88px; }
+  .section-title { max-width: 100%; overflow: hidden; }
+  .section-title h2 { font-size: 2.25rem; line-height: 1; letter-spacing: -.045em; }
+  .schedule-section { padding: 58px 0 70px; }
+  .schedule-section .section-title { padding: 0 20px; }
+  .schedule-track { display: flex; gap: 14px; overflow-x: auto; padding: 0 20px 18px; scroll-snap-type: x mandatory; }
+  .schedule-card { flex: 0 0 86vw; scroll-snap-align: center; }
+  .mission { grid-template-columns: 1fr; }
+  .mission-photo { min-height: 320px; }
+  .mission-copy { padding: 58px 24px; }
+}
+@media (max-width: 520px) {
+  .home-section .card-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card-copy { min-height: 165px; padding: 13px; }
+  .card h3 { font-size: .82rem; }
+  .card p { display: none; }
+  .card b { margin-top: 10px; }
+}
