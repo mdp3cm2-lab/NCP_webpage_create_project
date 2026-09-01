@@ -62,7 +62,7 @@ def nav
           <span></span><span></span><span></span><span class="sr-only">メニュー</span>
         </button>
         <nav id="site-nav" class="site-nav" data-nav>
-          <a href="/">HOME</a>
+          <a href="/soccer/">HOME</a>
           <a href="/news/">NEWS</a>
           <a href="/topic/">TOPIC</a>
           <a href="/we-are/">WE ARE</a>
@@ -124,6 +124,33 @@ def layout(site, title:, description:, path:, body:)
   HTML
 end
 
+def portal_layout(site, title:, description:, path:, body:)
+  canonical = "https://ncptokyo.net#{path}"
+  <<~HTML
+    <!doctype html>
+    <html lang="ja">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>#{h(title)}</title>
+      <meta name="description" content="#{h(description)}">
+      <link rel="canonical" href="#{h(canonical)}">
+      <meta property="og:title" content="#{h(title)}">
+      <meta property="og:description" content="#{h(description)}">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="#{h(canonical)}">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Noto+Sans+JP:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="/assets/style.css">
+    </head>
+    <body class="portal-page">
+      #{body}
+    </body>
+    </html>
+  HTML
+end
+
 def card(article, label)
   image = article['image'].to_s
   image_html = image.empty? ? '<div class="card-image card-image--empty"></div>' : %(<img class="card-image" src="#{h(image)}" alt="" loading="lazy">)
@@ -161,7 +188,7 @@ FileUtils.cp_r(public_files, DIST) unless public_files.empty?
 latest_news = news.first(4).map { |entry| card(entry, 'NEWS') }.join
 latest_topics = topics.first(3).map { |entry| card(entry, 'TOPIC') }.join
 
-home_body = <<~HTML
+soccer_body = <<~HTML
   <section class="legacy-hero" aria-label="大会写真">
     <div class="legacy-slider" data-slider>
       <img class="legacy-slide is-active" src="/uploads/2025/05/UNICCUP3.jpeg" alt="ユニックカップ会場">
@@ -214,7 +241,46 @@ home_body = <<~HTML
   </section>
 HTML
 
-write_page('', layout(site, title: site['site_name'], description: site['description'], path: '/', body: home_body))
+portal_body = <<~HTML
+  <main class="business-portal">
+    <header class="portal-header">
+      <img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP">
+      <div><p>NCP BUSINESS</p><h1>事業を選択してください</h1></div>
+    </header>
+    <div class="business-choices">
+      <a class="business-choice business-choice--food" href="/food/">
+        <span>FOOD BUSINESS</span>
+        <h2>飲食事業</h2>
+        <p>食を通じて、人と地域がつながる場所をつくる。</p>
+        <b>VIEW BUSINESS <i>→</i></b>
+      </a>
+      <a class="business-choice business-choice--soccer" href="/soccer/">
+        <span>SOCCER BUSINESS</span>
+        <h2>サッカー事業</h2>
+        <p>大会・イベントを通じて、子どもたちの挑戦を支える。</p>
+        <b>VIEW BUSINESS <i>→</i></b>
+      </a>
+    </div>
+    <footer class="portal-footer">© #{Time.now.year} NCP</footer>
+  </main>
+HTML
+
+food_body = <<~HTML
+  <main class="food-placeholder">
+    <a class="placeholder-logo" href="/"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
+    <div class="placeholder-copy">
+      <p>FOOD BUSINESS</p>
+      <h1>飲食事業</h1>
+      <h2>ただいま準備中です。</h2>
+      <p>店舗・サービス情報は、内容が決まり次第こちらでご案内します。</p>
+      <a href="/">事業選択へ戻る <span>→</span></a>
+    </div>
+  </main>
+HTML
+
+write_page('', portal_layout(site, title: site['site_name'], description: 'NCPの飲食事業とサッカー事業をご案内します。', path: '/', body: portal_body))
+write_page('soccer', layout(site, title: 'サッカー事業', description: site['description'], path: '/soccer/', body: soccer_body))
+write_page('food', portal_layout(site, title: "飲食事業 | #{site['site_name']}", description: 'NCPの飲食事業をご案内します。', path: '/food/', body: food_body))
 
 [['news', 'NEWS', news], ['topic', 'TOPIC', topics]].each do |directory, title, entries|
   intro = title == 'NEWS' ? '大会・イベントの最新情報' : 'サッカーを支える人とチームのストーリー'
@@ -276,7 +342,7 @@ HTML
 write_page('contact', layout(site, title: 'CONTACT', description: 'NCPへのお問い合わせ', path: '/contact/', body: contact_body))
 
 File.write(File.join(DIST, 'robots.txt'), "User-agent: *\nAllow: /\nSitemap: https://ncptokyo.net/sitemap.xml\n")
-urls = ['/', '/news/', '/topic/', '/we-are/', '/sns/', '/partners/', '/contact/'] + (news + topics).map { |entry| "/#{entry['slug']}/" }
+urls = ['/', '/food/', '/soccer/', '/news/', '/topic/', '/we-are/', '/sns/', '/partners/', '/contact/'] + (news + topics).map { |entry| "/#{entry['slug']}/" }
 sitemap = %(<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n) +
           urls.map { |url| "  <url><loc>https://ncptokyo.net#{h(url)}</loc></url>" }.join("\n") +
           "\n</urlset>\n"
