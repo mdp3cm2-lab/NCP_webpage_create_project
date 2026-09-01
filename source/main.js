@@ -22,3 +22,23 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 
+const slider = document.querySelector('[data-slider]');
+if (slider) {
+  const slides = [...slider.querySelectorAll('.legacy-slide')];
+  let current = 0;
+  let timer;
+
+  const show = (next) => {
+    slides[current]?.classList.remove('is-active');
+    current = (next + slides.length) % slides.length;
+    slides[current]?.classList.add('is-active');
+  };
+  const restart = () => {
+    window.clearInterval(timer);
+    timer = window.setInterval(() => show(current + 1), 5000);
+  };
+
+  slider.querySelector('[data-slide-prev]')?.addEventListener('click', () => { show(current - 1); restart(); });
+  slider.querySelector('[data-slide-next]')?.addEventListener('click', () => { show(current + 1); restart(); });
+  restart();
+}

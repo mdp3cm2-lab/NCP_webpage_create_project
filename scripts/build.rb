@@ -57,7 +57,7 @@ def nav
   <<~HTML
     <header class="site-header" data-header>
       <div class="header-inner">
-        <a class="brand" href="/" aria-label="NCP ホーム">NCP<span>FOOTBALL &amp; FUTURE</span></a>
+        <a class="brand" href="/" aria-label="NCP ホーム"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
           <span></span><span></span><span></span><span class="sr-only">メニュー</span>
         </button>
@@ -66,6 +66,7 @@ def nav
           <a href="/news/">NEWS</a>
           <a href="/topic/">TOPIC</a>
           <a href="/we-are/">WE ARE</a>
+          <a href="/sns/">SNS</a>
           <a href="/partners/">PARTNERS</a>
           <a class="nav-contact" href="/contact/">CONTACT</a>
         </nav>
@@ -83,8 +84,7 @@ def footer(site)
   <<~HTML
     <footer class="site-footer">
       <div>
-        <a class="footer-brand" href="/">NCP</a>
-        <p>WE SUPPORT THE FUTURE.</p>
+        <a class="footer-brand" href="/"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
       </div>
       <div class="footer-links">#{social.join}</div>
       <small>© #{Time.now.year} NCP</small>
@@ -158,49 +158,51 @@ FileUtils.cp(File.join(ROOT, 'source', 'main.js'), File.join(DIST, 'assets', 'ma
 public_files = Dir[File.join(ROOT, 'public', '*')]
 FileUtils.cp_r(public_files, DIST) unless public_files.empty?
 
-latest_news = news.first(3).map { |entry| card(entry, 'NEWS') }.join
+latest_news = news.first(4).map { |entry| card(entry, 'NEWS') }.join
 latest_topics = topics.first(3).map { |entry| card(entry, 'TOPIC') }.join
-hero_image = news.first&.fetch('image', '').to_s
-hero_style = hero_image.empty? ? '' : %( style="--hero-image: url('#{h(hero_image)}')")
 
 home_body = <<~HTML
-  <section class="hero"#{hero_style}>
-    <div class="hero-shape"></div>
-    <div class="hero-content reveal">
-      <p class="eyebrow">NEXT GENERATION, NEXT CHALLENGE</p>
-      <h1>FOOTBALL<br><em>FOR THE FUTURE.</em></h1>
-      <p>サッカーを愛する子どもたちへ。<br>記憶に残る体験と、新しい挑戦の舞台を。</p>
+  <section class="legacy-hero" aria-label="大会写真">
+    <div class="legacy-slider" data-slider>
+      <img class="legacy-slide is-active" src="/uploads/2025/05/UNICCUP3.jpeg" alt="ユニックカップ会場">
+      <img class="legacy-slide" src="/uploads/2025/05/UNICCUP1.001.jpeg" alt="ユニックカップ試合風景">
+      <img class="legacy-slide" src="/uploads/2025/05/UNICCUP2.001.jpeg" alt="ユニックカップ参加チーム">
+      <button class="slider-arrow slider-arrow--prev" type="button" data-slide-prev aria-label="前の画像">‹</button>
+      <button class="slider-arrow slider-arrow--next" type="button" data-slide-next aria-label="次の画像">›</button>
     </div>
-    <a class="scroll" href="#event">SCROLL<span>↓</span></a>
   </section>
 
   <section id="event" class="event-band">
-    <p class="eyebrow">GAME INFORMATION</p>
-    <div>
-      <h2>#{h(site['event_title'])}</h2>
-      <p><strong>#{h(site['event_date'])}</strong><br>#{h(site['event_place'])}</p>
-    </div>
-    <a class="button button--light" href="#{h(site['event_link'])}">大会の詳細を見る <span>→</span></a>
+    <h1>GAME INFORMATION</h1>
+    <h2>第3回Unic Cup開催決定！！</h2>
+    <p>#{h(site['event_date'])} #{h(site['event_place'])}にて開催いたします。</p>
+    <a class="legacy-button" href="#{h(site['event_link'])}">詳細はこちら</a>
   </section>
 
-  <section class="section">
-    <div class="section-heading reveal"><p class="eyebrow">LATEST INFORMATION</p><h2>NEWS</h2><a href="/news/">VIEW ALL →</a></div>
+  <section class="section home-section">
+    <div class="legacy-heading reveal"><h2><span>|</span> NEWS</h2></div>
     <div class="card-grid">#{latest_news}</div>
+    <div class="center"><a class="legacy-button legacy-button--navy" href="/news/">一覧を見る</a></div>
   </section>
 
   <section class="mission">
-    <div class="mission-number">09</div>
     <div class="mission-copy reveal">
-      <p class="eyebrow">OUR MISSION</p>
-      <h2>WE SUPPORT<br>THE <em>FUTURE.</em></h2>
-      <p>#{h(site['description'])}</p>
-      <a class="button" href="/we-are/">私たちについて <span>→</span></a>
+      <h2>WE SUPPORT THE FUTURE!!</h2>
+      <h3>サッカーをこよなく愛する少年少女のため</h3>
+      <p>イベントの企画・制作・運営を一貫してサポートいたします。<br>各試合の運営や動画・グッズ制作などのお声にお応えいたします。</p>
+      <a class="legacy-button legacy-button--navy" href="/we-are/">詳しく見る</a>
     </div>
   </section>
 
-  <section class="section section--dark">
-    <div class="section-heading reveal"><p class="eyebrow">PEOPLE &amp; STORIES</p><h2>TOPIC</h2><a href="/topic/">VIEW ALL →</a></div>
+  <section class="section home-section">
+    <div class="legacy-heading reveal"><h2><span>|</span> TOPIC</h2></div>
     <div class="card-grid">#{latest_topics}</div>
+    <div class="center"><a class="legacy-button legacy-button--navy" href="/topic/">一覧を見る</a></div>
+  </section>
+
+  <section class="social-section">
+    <div><h2><span>|</span> INSTAGRAM</h2><p>大会や活動の様子をInstagramで発信しています。</p><a class="legacy-button" href="#{h(site['instagram_url'])}" target="_blank" rel="noreferrer">Instagramを見る</a></div>
+    <div><h2><span>|</span> YOU TUBE</h2><video controls poster="/uploads/2025/10/2025-10-29-21.17.53.jpg"><source src="/uploads/2025/11/サッカーハイライト-３.mp4" type="video/mp4"></video></div>
   </section>
 HTML
 
@@ -251,6 +253,12 @@ partners_body = <<~HTML
 HTML
 write_page('partners', layout(site, title: 'PARTNERS', description: 'NCPのパートナー情報', path: '/partners/', body: partners_body))
 
+sns_body = <<~HTML
+  <section class="page-hero"><p class="eyebrow">NCP OFFICIAL</p><h1>SNS</h1><p>InstagramとYouTubeで活動の様子をお届けします。</p></section>
+  <section class="social-section"><div><h2><span>|</span> INSTAGRAM</h2><a class="legacy-button" href="#{h(site['instagram_url'])}" target="_blank" rel="noreferrer">Instagramを見る</a></div><div><h2><span>|</span> YOU TUBE</h2><video controls poster="/uploads/2025/10/2025-10-29-21.17.53.jpg"><source src="/uploads/2025/11/サッカーハイライト-３.mp4" type="video/mp4"></video></div></section>
+HTML
+write_page('sns', layout(site, title: 'SNS', description: 'NCP公式SNS', path: '/sns/', body: sns_body))
+
 email = site['contact_email'].to_s
 contact_action = email.empty? ? '<p class="notice">お問い合わせフォームの送信先は公開前に設定します。</p>' : %(<a class="button" href="mailto:#{h(email)}">メールを送る <span>→</span></a>)
 contact_body = <<~HTML
@@ -260,7 +268,7 @@ HTML
 write_page('contact', layout(site, title: 'CONTACT', description: 'NCPへのお問い合わせ', path: '/contact/', body: contact_body))
 
 File.write(File.join(DIST, 'robots.txt'), "User-agent: *\nAllow: /\nSitemap: https://ncptokyo.net/sitemap.xml\n")
-urls = ['/', '/news/', '/topic/', '/we-are/', '/partners/', '/contact/'] + (news + topics).map { |entry| "/#{entry['slug']}/" }
+urls = ['/', '/news/', '/topic/', '/we-are/', '/sns/', '/partners/', '/contact/'] + (news + topics).map { |entry| "/#{entry['slug']}/" }
 sitemap = %(<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n) +
           urls.map { |url| "  <url><loc>https://ncptokyo.net#{h(url)}</loc></url>" }.join("\n") +
           "\n</urlset>\n"
