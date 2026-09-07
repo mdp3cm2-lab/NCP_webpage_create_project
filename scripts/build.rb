@@ -247,7 +247,7 @@ soccer_body = <<~HTML
   </section>
 
   <section class="home-partners" aria-labelledby="home-partners-title">
-    <h2 id="home-partners-title">OFFICIAL PARTNERS</h2>
+    <h2 id="home-partners-title">PARTNERS</h2>
     <div class="home-partner-grid">
       <a href="https://www.b-aiacademy.com" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45875216_0.jpg" alt="僕のAIアカデミー"></a>
       <div><img src="/uploads/2025/04/S__45875214_0.jpg" alt="竜山口建築"></div>

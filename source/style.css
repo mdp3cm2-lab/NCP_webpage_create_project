@@ -326,8 +326,8 @@ a.partner-card:hover img { transform: scale(1.035); }
 .home-partners { padding: 64px 30px 58px; color: white; background: #031f47; text-align: center; }
 .home-partners h2 { margin: 0 0 34px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: .02em; }
 .home-partner-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; max-width: 1120px; margin: auto; }
-.home-partner-grid > * { display: grid; place-items: center; height: 76px; padding: 9px 12px; overflow: hidden; background: white; }
-.home-partner-grid img { width: 100%; height: 100%; object-fit: contain; transition: transform .25s ease; }
+.home-partner-grid > * { position: relative; display: block; height: 96px; overflow: hidden; background: white; }
+.home-partner-grid img { position: absolute; inset: 10px 12px; width: calc(100% - 24px); height: calc(100% - 20px); max-width: none; object-fit: contain; transition: transform .25s ease; }
 .home-partner-grid a:hover img { transform: scale(1.04); }
 .home-partners-more { display: inline-flex; gap: 36px; align-items: center; margin-top: 32px; padding-bottom: 3px; border-bottom: 1px solid white; font-family: "Barlow Condensed", sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: .08em; }
 .site-footer { grid-template-columns: auto 1fr; padding-top: 36px; padding-bottom: 30px; background: #b32632; }
@@ -348,7 +348,7 @@ a.partner-card:hover img { transform: scale(1.035); }
 @media (max-width: 520px) {
   .home-partners { padding: 50px 20px 46px; }
   .home-partner-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .home-partner-grid > * { height: 70px; padding: 8px; }
+  .home-partner-grid > * { height: 88px; }
   .site-footer { grid-template-columns: 1fr auto; gap: 18px; padding: 30px 20px 24px; }
   .footer-brand { width: 62px; height: 62px; }
   .site-footer small { grid-column: 1/-1; }
