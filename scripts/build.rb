@@ -244,21 +244,26 @@ HTML
 portal_body = <<~HTML
   <main class="business-portal">
     <header class="portal-header">
-      <img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP">
       <div><p>NCP BUSINESS</p><h1>事業を選択してください</h1></div>
     </header>
     <div class="business-choices">
       <a class="business-choice business-choice--food" href="/food/">
-        <span>FOOD BUSINESS</span>
-        <h2>飲食事業</h2>
-        <p>食を通じて、人と地域がつながる場所をつくる。</p>
-        <b>VIEW BUSINESS <i>→</i></b>
+        <div class="business-choice-logo"><img src="/uploads/2026/09/iburi-logo.png" alt="いぶり 炭火焼鶏"></div>
+        <div class="business-choice-copy">
+          <span>FOOD BUSINESS</span>
+          <h2>飲食事業</h2>
+          <p>食を通じて、人と地域がつながる場所をつくる。</p>
+          <b>VIEW BUSINESS <i>→</i></b>
+        </div>
       </a>
       <a class="business-choice business-choice--soccer" href="/soccer/">
-        <span>SOCCER BUSINESS</span>
-        <h2>サッカー事業</h2>
-        <p>大会・イベントを通じて、子どもたちの挑戦を支える。</p>
-        <b>VIEW BUSINESS <i>→</i></b>
+        <div class="business-choice-logo"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></div>
+        <div class="business-choice-copy">
+          <span>SOCCER BUSINESS</span>
+          <h2>サッカー事業</h2>
+          <p>大会・イベントを通じて、子どもたちの挑戦を支える。</p>
+          <b>VIEW BUSINESS <i>→</i></b>
+        </div>
       </a>
     </div>
     <footer class="portal-footer">© #{Time.now.year} NCP</footer>
@@ -267,7 +272,7 @@ HTML
 
 food_body = <<~HTML
   <main class="food-placeholder">
-    <a class="placeholder-logo" href="/"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
+    <a class="placeholder-logo placeholder-logo--food" href="/"><img src="/uploads/2026/09/iburi-logo.png" alt="いぶり 炭火焼鶏"></a>
     <div class="placeholder-copy">
       <p>FOOD BUSINESS</p>
       <h1>飲食事業</h1>
