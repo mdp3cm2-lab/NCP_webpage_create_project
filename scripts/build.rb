@@ -79,8 +79,12 @@ def footer(site)
   instagram = site['instagram_url'].to_s
   youtube = site['youtube_url'].to_s
   social = []
-  social << %(<a href="#{h(instagram)}" target="_blank" rel="noreferrer">Instagram</a>) unless instagram.empty?
-  social << %(<a href="#{h(youtube)}" target="_blank" rel="noreferrer">YouTube</a>) unless youtube.empty?
+  unless instagram.empty?
+    social << %(<a class="footer-social-icon" href="#{h(instagram)}" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle class="icon-dot" cx="17.5" cy="6.7" r="1.1"></circle></svg></a>)
+  end
+  unless youtube.empty?
+    social << %(<a class="footer-social-icon" href="#{h(youtube)}" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.2 7.1c-.2-1.3-1.2-2.3-2.5-2.5C16.9 4.3 14.7 4.2 12 4.2s-4.9.1-6.7.4C4 4.8 3 5.8 2.8 7.1 2.5 8.5 2.4 10.1 2.4 12s.1 3.5.4 4.9c.2 1.3 1.2 2.3 2.5 2.5 1.8.3 4 .4 6.7.4s4.9-.1 6.7-.4c1.3-.2 2.3-1.2 2.5-2.5.3-1.4.4-3 .4-4.9s-.1-3.5-.4-4.9Z"></path><path class="icon-play" d="m10 8.5 5.5 3.5-5.5 3.5Z"></path></svg></a>)
+  end
   <<~HTML
     <footer class="site-footer">
       <div>
@@ -240,6 +244,20 @@ soccer_body = <<~HTML
   <section class="social-section">
     <div><h2><span>|</span> INSTAGRAM</h2><p>大会や活動の様子をInstagramで発信しています。</p><a class="legacy-button" href="#{h(site['instagram_url'])}" target="_blank" rel="noreferrer">Instagramを見る</a></div>
     <div><h2><span>|</span> YOU TUBE</h2><video controls poster="/uploads/2025/10/2025-10-29-21.17.53.jpg"><source src="/uploads/2025/11/サッカーハイライト-３.mp4" type="video/mp4"></video></div>
+  </section>
+
+  <section class="home-partners" aria-labelledby="home-partners-title">
+    <h2 id="home-partners-title">OFFICIAL PARTNERS</h2>
+    <div class="home-partner-grid">
+      <a href="https://www.b-aiacademy.com" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45875216_0.jpg" alt="僕のAIアカデミー"></a>
+      <div><img src="/uploads/2025/04/S__45875214_0.jpg" alt="竜山口建築"></div>
+      <a href="https://www.instagram.com/brillante.17/" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/ブリランテ.png" alt="BRILLANTE"></a>
+      <a href="https://shurina.jp/2024/03/11/555/" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45867056_0.jpg" alt="bobororo cinematic restaurant"></a>
+      <a href="https://www.cardealer-ism.jp" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45867055_0.jpg" alt="CAR DEALER ISM"></a>
+      <a href="https://www.emu-vet.jp" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45875217.png" alt="エム動物病院"></a>
+      <a href="https://www.instagram.com/ricefarmreinan?igsh=dDJubTFiaGpwemsx" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45867053_0.png" alt="RICE FARM REINAN"></a>
+    </div>
+    <a class="home-partners-more" href="/partners/">MORE PARTNERS <span>→</span></a>
   </section>
 HTML
 
