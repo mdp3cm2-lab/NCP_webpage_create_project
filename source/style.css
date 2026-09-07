@@ -142,8 +142,8 @@ body { overflow-x: hidden; background: #fff; }
 .nav-contact::after { display: none; }
 .nav-contact:hover { color: white !important; background: #d90000; }
 .legacy-hero { padding: 0; background: #070b1c; }
-.legacy-slider { width: min(100%, 1240px); aspect-ratio: 16/7.45; box-shadow: none; }
-.legacy-slide { object-fit: cover; }
+.legacy-slider { width: min(100%, 1240px); aspect-ratio: 16/9; box-shadow: none; }
+.legacy-slide { object-fit: contain; }
 .slider-arrow { width: 44px; height: 70px; background: rgba(0,10,110,.82); border-radius: 4px; font-size: 2.4rem; }
 .slider-thumbs { display: flex; gap: 7px; justify-content: center; min-height: 58px; padding: 8px 20px; background: white; }
 .slider-thumbs button { width: 92px; height: 42px; padding: 0; overflow: hidden; background: #ddd; border: 3px solid transparent; border-radius: 4px; cursor: pointer; }
@@ -199,8 +199,8 @@ body { overflow-x: hidden; background: #fff; }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: 12px 0; }
   .nav-contact { margin: 8px 0 0; padding: 12px !important; text-align: center; }
-  .legacy-slider { aspect-ratio: 1/1.08; }
-  .legacy-slide { object-fit: cover; }
+  .legacy-slider { aspect-ratio: 16/9; }
+  .legacy-slide { object-fit: contain; }
   .slider-thumbs { justify-content: flex-start; overflow-x: auto; }
   .slider-thumbs button { flex: 0 0 88px; }
   .section-title { max-width: 100%; overflow: hidden; }

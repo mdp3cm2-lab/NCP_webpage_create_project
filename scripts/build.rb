@@ -57,7 +57,7 @@ def nav
   <<~HTML
     <header class="site-header" data-header>
       <div class="header-inner">
-        <a class="brand" href="/" aria-label="NCP ホーム"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
+        <a class="brand" href="/soccer/" aria-label="サッカー事業 ホーム"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
           <span></span><span></span><span></span><span class="sr-only">メニュー</span>
         </button>
@@ -84,7 +84,7 @@ def footer(site)
   <<~HTML
     <footer class="site-footer">
       <div>
-        <a class="footer-brand" href="/"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
+        <a class="footer-brand" href="/soccer/"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
       </div>
       <div class="footer-links">#{social.join}</div>
       <small>© #{Time.now.year} NCP</small>
