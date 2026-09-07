@@ -191,16 +191,18 @@ latest_topics = topics.first(3).map { |entry| card(entry, 'TOPIC') }.join
 soccer_body = <<~HTML
   <section class="legacy-hero" aria-label="大会写真">
     <div class="legacy-slider" data-slider>
-      <img class="legacy-slide is-active" src="/uploads/2025/05/UNICCUP3.jpeg" alt="ユニックカップ会場">
-      <img class="legacy-slide" src="/uploads/2025/05/UNICCUP1.001.jpeg" alt="ユニックカップ試合風景">
-      <img class="legacy-slide" src="/uploads/2025/05/UNICCUP2.001.jpeg" alt="ユニックカップ参加チーム">
+      <img class="legacy-slide is-active" src="/uploads/2026/09/01_④_ユニックカップ.jpg" alt="第3回ユニックカップ開催案内">
+      <img class="legacy-slide" src="/uploads/2026/09/02_①_ユニックカップ.jpg" alt="ユニックカップ試合風景">
+      <img class="legacy-slide" src="/uploads/2026/09/02_④_ユニックカップ.jpg" alt="ユニックカップ優勝チーム">
+      <img class="legacy-slide" src="/uploads/2026/09/03_②_ユニックカップ.jpg" alt="ユニックカップ大会ダイジェスト">
       <button class="slider-arrow slider-arrow--prev" type="button" data-slide-prev aria-label="前の画像">‹</button>
       <button class="slider-arrow slider-arrow--next" type="button" data-slide-next aria-label="次の画像">›</button>
     </div>
     <div class="slider-thumbs" aria-label="スライドを選択">
-      <button class="is-active" type="button" data-slide-to="0"><img src="/uploads/2025/05/UNICCUP3.jpeg" alt=""></button>
-      <button type="button" data-slide-to="1"><img src="/uploads/2025/05/UNICCUP1.001.jpeg" alt=""></button>
-      <button type="button" data-slide-to="2"><img src="/uploads/2025/05/UNICCUP2.001.jpeg" alt=""></button>
+      <button class="is-active" type="button" data-slide-to="0"><img src="/uploads/2026/09/01_④_ユニックカップ.jpg" alt=""></button>
+      <button type="button" data-slide-to="1"><img src="/uploads/2026/09/02_①_ユニックカップ.jpg" alt=""></button>
+      <button type="button" data-slide-to="2"><img src="/uploads/2026/09/02_④_ユニックカップ.jpg" alt=""></button>
+      <button type="button" data-slide-to="3"><img src="/uploads/2026/09/03_②_ユニックカップ.jpg" alt=""></button>
     </div>
   </section>
 
@@ -220,7 +222,7 @@ soccer_body = <<~HTML
   </section>
 
   <section class="mission">
-    <div class="mission-photo"><img src="/uploads/2025/09/77EC4AAA-FE18-43C8-A38E-4D7862A732C4.jpg" alt="サッカーを楽しむ子どもたち" loading="lazy"></div>
+    <div class="mission-photo"><img src="/uploads/2026/09/IMG_0879-1.jpg" alt="大会を終えた選手たち" loading="lazy"></div>
     <div class="mission-copy reveal">
       <div class="section-title"><h2>OUR MISSION</h2><p>NCPについて</p></div>
       <h3>サッカーをこよなく愛する少年少女のため</h3>
