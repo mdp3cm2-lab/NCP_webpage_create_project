@@ -45,3 +45,21 @@ if (slider) {
   thumbs.forEach((thumb) => thumb.addEventListener('click', () => { show(Number(thumb.dataset.slideTo)); restart(); }));
   restart();
 }
+
+const contactForm = document.querySelector('[data-contact-form]');
+contactForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (!contactForm.reportValidity()) return;
+
+  const data = new FormData(contactForm);
+  const subject = String(data.get('subject') || 'NCPサイトからのお問い合わせ');
+  const message = [
+    `お名前: ${data.get('name') || ''}`,
+    `電話番号: ${data.get('phone') || ''}`,
+    `メールアドレス: ${data.get('email') || ''}`,
+    '',
+    String(data.get('message') || '')
+  ].join('\n');
+  const recipient = contactForm.dataset.contactEmail || 'info@ncptokyo.net';
+  window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+});

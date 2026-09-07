@@ -330,7 +330,19 @@ write_page('we-are', layout(site, title: 'WE ARE', description: site['descriptio
 
 partners_body = <<~HTML
   <section class="page-hero"><p class="eyebrow">TOGETHER FOR THE FUTURE</p><h1>PARTNERS</h1><p>NCPの活動をともに支えるパートナー。</p></section>
-  <section class="statement"><p class="eyebrow">PARTNERSHIP</p><h2>子どもたちの未来を、<br>ともにつくりませんか。</h2><p>大会やイベントへの協賛・連携について、お気軽にお問い合わせください。</p><a class="button" href="/contact/">お問い合わせ <span>→</span></a></section>
+  <section class="partners-section">
+    <div class="partners-intro"><p class="eyebrow">OUR PARTNERS</p><h2>ともに、子どもたちの未来を。</h2><p>NCPの大会・イベントは、多くの企業・団体の皆さまに支えられています。</p></div>
+    <div class="partner-grid">
+      <a class="partner-card" href="https://www.b-aiacademy.com" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45875216_0.jpg" alt="僕のAIアカデミー"><span>WEB SITE ↗</span></a>
+      <div class="partner-card"><img src="/uploads/2025/04/S__45875214_0.jpg" alt="竜山口建築"></div>
+      <a class="partner-card" href="https://www.instagram.com/brillante.17/" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/ブリランテ.png" alt="BRILLANTE"><span>INSTAGRAM ↗</span></a>
+      <a class="partner-card" href="https://shurina.jp/2024/03/11/555/" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45867056_0.jpg" alt="bobororo cinematic restaurant"><span>WEB SITE ↗</span></a>
+      <a class="partner-card" href="https://www.cardealer-ism.jp" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45867055_0.jpg" alt="CAR DEALER ISM"><span>WEB SITE ↗</span></a>
+      <a class="partner-card" href="https://www.emu-vet.jp" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45875217.png" alt="エム動物病院"><span>WEB SITE ↗</span></a>
+      <a class="partner-card" href="https://www.instagram.com/ricefarmreinan?igsh=dDJubTFiaGpwemsx" target="_blank" rel="noreferrer"><img src="/uploads/2025/04/S__45867053_0.png" alt="RICE FARM REINAN"><span>INSTAGRAM ↗</span></a>
+    </div>
+    <div class="partner-cta"><p>協賛・パートナーシップについて、お気軽にご相談ください。</p><a class="legacy-button legacy-button--navy" href="/contact/">お問い合わせ</a></div>
+  </section>
 HTML
 write_page('partners', layout(site, title: 'PARTNERS', description: 'NCPのパートナー情報', path: '/partners/', body: partners_body))
 
@@ -341,10 +353,26 @@ HTML
 write_page('sns', layout(site, title: 'SNS', description: 'NCP公式SNS', path: '/sns/', body: sns_body))
 
 email = site['contact_email'].to_s
-contact_action = email.empty? ? '<p class="notice">お問い合わせフォームの送信先は公開前に設定します。</p>' : %(<a class="button" href="mailto:#{h(email)}">メールを送る <span>→</span></a>)
+contact_email = email.empty? ? 'info@ncptokyo.net' : email
 contact_body = <<~HTML
   <section class="page-hero page-hero--green"><p class="eyebrow">GET IN TOUCH</p><h1>CONTACT</h1><p>大会運営、制作、協賛についてご相談ください。</p></section>
-  <section class="contact-panel"><p class="eyebrow">CONTACT US</p><h2>一緒に、新しい舞台を。</h2><p>イベントの企画・運営、動画やグッズ制作、パートナーシップについて承ります。</p>#{contact_action}</section>
+  <section class="contact-section">
+    <div class="contact-intro">
+      <p class="eyebrow">CONTACT US</p>
+      <h2>一緒に、新しい舞台を。</h2>
+      <p>イベントの企画・運営、動画やグッズ制作、パートナーシップについて承ります。以下の項目をご入力ください。</p>
+      <div class="contact-direct"><span>MAIL</span><a href="mailto:#{h(contact_email)}">#{h(contact_email)}</a></div>
+    </div>
+    <form class="contact-form" data-contact-form data-contact-email="#{h(contact_email)}">
+      <label><span>お名前 <b>必須</b></span><input type="text" name="name" autocomplete="name" required></label>
+      <label><span>電話番号</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel"></label>
+      <label><span>メールアドレス <b>必須</b></span><input type="email" name="email" autocomplete="email" required></label>
+      <label><span>タイトル <b>必須</b></span><input type="text" name="subject" required></label>
+      <label><span>お問い合わせ内容 <b>必須</b></span><textarea name="message" rows="8" maxlength="2000" required></textarea></label>
+      <button type="submit">メールを作成する <i>→</i></button>
+      <p class="form-note">送信ボタンを押すと、ご利用のメールソフトが開きます。</p>
+    </form>
+  </section>
 HTML
 write_page('contact', layout(site, title: 'CONTACT', description: 'NCPへのお問い合わせ', path: '/contact/', body: contact_body))
 
