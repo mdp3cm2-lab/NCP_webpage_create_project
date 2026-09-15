@@ -14,6 +14,7 @@ ROOT = File.expand_path('..', __dir__)
 DIST = File.join(ROOT, 'dist')
 MAX_STATIC_FILE_SIZE = 25 * 1024 * 1024
 COPYRIGHT_YEAR = '2025'
+FOOD_COPYRIGHT_YEAR = '2026'
 LOGO_PATH = '/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png'
 ALLOWED_CONTENT_ELEMENTS = %w[
   a b blockquote br div em figcaption figure h2 h3 h4 i img li mark ol p s span strong
@@ -511,7 +512,7 @@ food_body = <<~HTML
     <section id="scene" class="scene"><div class="scene-copy reveal"><p class="en">SUMIBI</p><h2>目の前の炭と、<br>向き合って焼く。</h2><p>火力も、煙も、その日の炭の状態も同じではありません。網の上の鶏を見ながら、炭火ならではの香りと焼き目をまとわせます。</p></div><div class="photos"><img src="/food-assets/grilling1.jpg" alt="炭火で鶏を焼く様子"><img src="/food-assets/grilling2.jpg" alt="キッチンカーで炭火焼をする様子"><img src="/food-assets/fire.jpg" alt="炎が上がる炭火焼"></div></section>
     <section id="contact" class="contact reveal"><img src="/food-assets/logo.png" alt="いぶり"><h2>炭火の香りを、街角へ。</h2><p>出店情報・イベント出店・フランチャイズについての情報は、順次こちらでお知らせします。</p><a href="mailto:#{h(contact_email(site['contact_email']))}?subject=#{CGI.escape('いぶりへのお問い合わせ')}">お問い合わせ</a></section>
   </main>
-  <footer>© #{COPYRIGHT_YEAR} 炭火焼鶏 いぶり</footer>
+  <footer>© #{FOOD_COPYRIGHT_YEAR} 炭火焼鶏 いぶり</footer>
 HTML
 
 write_page('', portal_layout(title: site['site_name'], description: 'NCPの飲食事業とサッカー事業をご案内します。', path: '/', body: portal_body))
