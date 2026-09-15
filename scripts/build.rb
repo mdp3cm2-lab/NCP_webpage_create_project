@@ -16,7 +16,7 @@ DIST = File.join(ROOT, 'dist')
 MAX_STATIC_FILE_SIZE = 25 * 1024 * 1024
 COPYRIGHT_YEAR = '2025'
 FOOD_COPYRIGHT_YEAR = '2026'
-ASSET_VERSION = '20260915-1'
+ASSET_VERSION = '20260915-2'
 GOOGLE_SITE_VERIFICATION = '5ABLHMd90YL_9vMOqIfUCPyV55g74OTmi0kus27bDDM'
 LOGO_PATH = '/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png'
 ALLOWED_CONTENT_ELEMENTS = %w[
@@ -512,7 +512,7 @@ portal_body = <<~HTML
     </header>
     <div class="business-choices">
       <a class="business-choice business-choice--food" href="/food/">
-        <div class="business-choice-logo"><img src="/uploads/2026/09/iburi-logo.png" alt="いぶり 炭火焼鶏"></div>
+        <div class="business-choice-logo"><img src="/uploads/2026/09/iburi-clear.png" alt="いぶり 炭火焼鶏"></div>
         <div class="business-choice-copy">
           <span>FOOD BUSINESS</span>
           <h2>飲食事業</h2>

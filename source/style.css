@@ -300,7 +300,7 @@ a.partner-card:hover img { transform: scale(1.035); }
 .business-choice--soccer { background: radial-gradient(circle at 70% 16%, #182b9e 0, transparent 35%), linear-gradient(145deg, #02075b, #010434 70%); border-left: 1px solid rgba(255,255,255,.13); }
 .business-choice-logo { display: grid; place-items: center; min-height: 260px; }
 .business-choice-logo img { width: min(68%, 330px); max-height: 310px; object-fit: contain; transition: transform .4s ease; }
-.business-choice--food .business-choice-logo img { background: white; box-shadow: 0 18px 50px rgba(0,0,0,.22); }
+.business-choice--food .business-choice-logo img { filter: drop-shadow(0 18px 28px rgba(0,0,0,.28)); }
 .business-choice--soccer .business-choice-logo img { width: min(76%, 390px); }
 .business-choice--soccer h2 { font-size: clamp(2.2rem, 4.2vw, 4.5rem); white-space: nowrap; }
 .business-choice:hover .business-choice-logo img { transform: scale(1.025); }
