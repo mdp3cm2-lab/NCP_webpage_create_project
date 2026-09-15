@@ -56,8 +56,7 @@ def write_page(path, contents)
 end
 
 def copyright_years
-  current_year = Time.now.year
-  current_year > 2025 ? "2025–#{current_year}" : '2025'
+  '2025'
 end
 
 def copy_public_tree(source, destination)
