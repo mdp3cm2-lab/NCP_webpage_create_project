@@ -55,6 +55,11 @@ def write_page(path, contents)
   File.write(absolute, contents)
 end
 
+def copyright_years
+  current_year = Time.now.year
+  current_year > 2025 ? "2025–#{current_year}" : '2025'
+end
+
 def copy_public_tree(source, destination)
   skipped = []
   Find.find(source) do |path|
@@ -112,7 +117,7 @@ def footer(site)
         <a class="footer-brand" href="/soccer/"><img src="/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png" alt="NCP"></a>
       </div>
       <div class="footer-links">#{social.join}</div>
-      <small>© #{Time.now.year} NCP</small>
+      <small>© #{copyright_years} NCP</small>
     </footer>
     <script src="/assets/main.js" defer></script>
   HTML
@@ -327,7 +332,7 @@ portal_body = <<~HTML
         </div>
       </a>
     </div>
-    <footer class="portal-footer">© #{Time.now.year} NCP</footer>
+    <footer class="portal-footer">© #{copyright_years} NCP</footer>
   </main>
 HTML
 
