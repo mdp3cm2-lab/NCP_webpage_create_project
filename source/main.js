@@ -14,13 +14,20 @@ document.querySelectorAll('[data-nav] a').forEach((link) => {
   });
 });
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) entry.target.classList.add('is-visible');
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+const revealElements = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealElements.forEach((element) => observer.observe(element));
+} else {
+  revealElements.forEach((element) => element.classList.add('is-visible'));
+}
 
 const slider = document.querySelector('[data-slider]');
 if (slider) {
@@ -43,7 +50,7 @@ if (slider) {
   slider.querySelector('[data-slide-prev]')?.addEventListener('click', () => { show(current - 1); restart(); });
   slider.querySelector('[data-slide-next]')?.addEventListener('click', () => { show(current + 1); restart(); });
   thumbs.forEach((thumb) => thumb.addEventListener('click', () => { show(Number(thumb.dataset.slideTo)); restart(); }));
-  restart();
+  if (slides.length > 1) restart();
 }
 
 const contactForm = document.querySelector('[data-contact-form]');
@@ -60,6 +67,9 @@ contactForm?.addEventListener('submit', (event) => {
     '',
     String(data.get('message') || '')
   ].join('\n');
-  const recipient = contactForm.dataset.contactEmail || 'info@ncptokyo.net';
-  window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  const configuredRecipient = contactForm.dataset.contactEmail || '';
+  const recipient = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(configuredRecipient)
+    ? configuredRecipient
+    : 'info@ncptokyo.net';
+  window.location.assign(`mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`);
 });

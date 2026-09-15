@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 require 'cgi'
+require 'date'
 require 'fileutils'
 require 'rexml/document'
 require 'uri'
@@ -12,7 +13,9 @@ abort "Usage: ruby scripts/import_wordpress.rb path/to/export.xml" unless ARGV[0
 
 xml_path = File.expand_path(ARGV[0])
 root = File.expand_path('..', __dir__)
-xml = REXML::Document.new(File.read(xml_path, encoding: 'UTF-8'))
+xml_source = File.read(xml_path, encoding: 'UTF-8')
+abort 'WordPress export must not contain a DOCTYPE declaration.' if xml_source.match?(/<!DOCTYPE/i)
+xml = REXML::Document.new(xml_source)
 ns = {
   'wp' => 'http://wordpress.org/export/1.2/',
   'content' => 'http://purl.org/rss/1.0/modules/content/'
@@ -40,6 +43,21 @@ def yaml_frontmatter(data)
   "---\n#{yaml}---\n"
 end
 
+def attachment_destination(url)
+  uri = URI.parse(URI::DEFAULT_PARSER.escape(url))
+  return unless %w[http https].include?(uri.scheme&.downcase)
+  return unless %w[ncptokyo.net www.ncptokyo.net].include?(uri.host&.downcase)
+  return unless uri.path.start_with?('/wp-content/')
+
+  relative = URI.decode_www_form_component(uri.path.delete_prefix('/wp-content/'))
+  return if relative.empty? || relative.include?("\0") || relative.include?('\\') || relative.split('/').include?('..')
+  return unless %w[.avif .gif .jpeg .jpg .mp4 .pdf .png .webm .webp].include?(File.extname(relative).downcase)
+
+  File.join('public', relative)
+rescue URI::InvalidURIError, ArgumentError
+  nil
+end
+
 items = REXML::XPath.match(xml, '//item')
 attachments = {}
 
@@ -64,8 +82,17 @@ items.each do |item|
   next unless node_text(item, 'wp:status', ns) == 'publish'
 
   id = node_text(item, 'wp:post_id', ns)
+  next unless id.match?(/\A\d+\z/)
+
   title = clean_title(node_text(item, 'title'))
   date = node_text(item, 'wp:post_date', ns)[0, 10]
+  next unless date.match?(/\A\d{4}-\d{2}-\d{2}\z/)
+
+  begin
+    Date.iso8601(date)
+  rescue Date::Error
+    next
+  end
   raw_slug = node_text(item, 'wp:post_name', ns)
   slug = begin
     URI.decode_www_form_component(raw_slug)
@@ -106,8 +133,12 @@ items.each do |item|
 end
 
 attachments.each_value do |url|
-  relative = url.sub(%r{\Ahttps?://[^/]+/wp-content/}, '')
-  manifest << [url, File.join('public', relative)]
+  destination = attachment_destination(url)
+  if destination
+    manifest << [url, destination]
+  else
+    warn "Skipped invalid attachment URL: #{url}"
+  end
 end
 
 File.write(

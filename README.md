@@ -13,6 +13,7 @@ ruby scripts/download_media.rb
 
 ```sh
 ruby scripts/build.rb
+ruby scripts/verify.rb
 ```
 
 生成結果は `dist/` に出力されます。

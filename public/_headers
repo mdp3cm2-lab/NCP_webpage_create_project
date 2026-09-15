@@ -1,0 +1,14 @@
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; frame-src https://www.instagram.com https://www.youtube-nocookie.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000
+  Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+/assets/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/uploads/*
+  Cache-Control: public, max-age=604800
