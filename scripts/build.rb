@@ -340,6 +340,31 @@ def portal_layout(title:, description:, path:, body:)
   HTML
 end
 
+def food_layout(title:, description:, body:)
+  canonical = 'https://ncptokyo.net/food/'
+  <<~HTML
+    <!doctype html>
+    <html lang="ja">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>#{h(title)}</title>
+      <meta name="description" content="#{h(description)}">
+      <link rel="canonical" href="#{canonical}">
+      <meta property="og:title" content="#{h(title)}">
+      <meta property="og:description" content="#{h(description)}">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="#{canonical}">
+      <link rel="stylesheet" href="/assets/food.css">
+      <script src="/assets/food.js"></script>
+    </head>
+    <body>
+      #{body}
+    </body>
+    </html>
+  HTML
+end
+
 def card(article, label)
   image = article_asset(article['image'], "image for #{article['source_path']}")
   image_html = image.empty? ? '<div class="card-image card-image--empty"></div>' : %(<img class="card-image" src="#{h(image)}" alt="" loading="lazy">)
@@ -372,6 +397,8 @@ FileUtils.rm_rf(DIST)
 FileUtils.mkdir_p(File.join(DIST, 'assets'))
 FileUtils.cp(File.join(ROOT, 'source', 'style.css'), File.join(DIST, 'assets', 'style.css'))
 FileUtils.cp(File.join(ROOT, 'source', 'main.js'), File.join(DIST, 'assets', 'main.js'))
+FileUtils.cp(File.join(ROOT, 'source', 'food.css'), File.join(DIST, 'assets', 'food.css'))
+FileUtils.cp(File.join(ROOT, 'source', 'food.js'), File.join(DIST, 'assets', 'food.js'))
 public_root = File.join(ROOT, 'public')
 skipped_large_files = Dir.exist?(public_root) ? copy_public_tree(public_root, DIST) : []
 
@@ -471,21 +498,25 @@ portal_body = <<~HTML
 HTML
 
 food_body = <<~HTML
-  <main class="food-placeholder">
-    <a class="placeholder-logo placeholder-logo--food" href="/"><img src="/uploads/2026/09/iburi-logo.png" alt="いぶり 炭火焼鶏"></a>
-    <div class="placeholder-copy">
-      <p>FOOD BUSINESS</p>
-      <h1>飲食事業</h1>
-      <h2>ただいま準備中です。</h2>
-      <p>店舗・サービス情報は、内容が決まり次第こちらでご案内します。</p>
-      <a href="/">事業選択へ戻る <span>→</span></a>
-    </div>
+  <header>
+    <a href="#top"><img src="/food-assets/logo.png" alt="炭火焼鶏 いぶり"></a>
+    <a class="portal-return" href="/">← 事業TOP</a>
+    <nav><a href="#craft">こだわり</a><a href="#menu">メニュー</a><a href="#scene">炭火焼</a><a href="#contact">お問い合わせ</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero"><video autoplay muted loop playsinline poster="/food-assets/fire.jpg"><source src="/food-assets/hero.mp4" type="video/mp4"></video><div class="shade"></div><div class="hero-copy"><p class="kicker">SUMIBI YAKITORI FOOD TRUCK</p><h1><span class="hero-line">銘柄鶏、昆布と塩、炭。</span><strong>以上。</strong></h1><p>選ぶ。味を引き出す。炭で焼く。<br>いぶりの炭火焼鶏。</p><a href="#menu">メニューを見る</a></div></section>
+    <section id="craft" class="craft reveal"><div class="craft-copy"><p class="en">KODAWARI</p><h2>こだわり</h2><p>銘柄鶏、昆布だしと塩、そして炭。素材の持ち味をまっすぐに引き出す、いぶりの三つの軸です。</p><p class="note">※使用する銘柄鶏は出店地域・仕入れ状況により異なる場合があります。現在は群馬県の「赤城鶏」を採用候補として調整中です。</p></div><img src="/food-assets/charcoal.jpg" alt="赤く熾った炭"></section>
+    <section class="pillars" aria-label="いぶりの3つのこだわり"><article class="pillar-chicken"><div class="pillar-visual"><img src="/food-assets/image3.jpg" alt="銘柄鶏のイメージ"></div><b>01</b><h3>銘柄鶏</h3><p>現在採用を調整しているのは、群馬県の銘柄鶏「赤城鶏」。植物性主体の飼料や平飼いなど、丁寧な飼育管理のもと育てられた鶏です。脂身が少なく引き締まった肉質を、炭火で香ばしく仕上げます。</p></article><article class="pillar-seasoning"><div class="seasoning-mark"><span>昆布</span><i>＋</i><span>塩</span></div><b>02</b><h3>昆布だしと塩</h3><p>味付けは、昆布だしと塩だけ。調味料そのものも無添加にこだわり、余計な味を重ねず、鶏の旨みをまっすぐ引き出します。</p></article><article class="pillar-charcoal"><div class="ember-visual"><img src="/food-assets/charcoal.jpg" alt="赤く熾った炭"></div><b>03</b><h3>炭</h3><p>焼き上げに使うのは、厳選した備長炭。力強い火力で表面を香ばしく焼き、炭火ならではの香りをまとわせます。いぶりの味を最後に仕上げる、大切な火です。</p></article><p class="craft-closing">すべては、鶏を旨くするために。</p></section>
+    <section id="menu" class="menu section-rule"><div class="title reveal"><p class="en">MENU</p><h2>お品書き</h2><p>串には刺さず、炭火で焼いた鶏をパックで。<br>味付けはすべて、昆布だしと塩だけ。</p></div><div class="menu-board" aria-label="いぶりのお品書き"><div class="menu-card"><img src="/food-assets/menu-breast.jpg" alt="炭火で焼いたむね肉"><div class="menu-card-copy"><span>あっさり、しっとり。</span><h3>むね肉</h3><p>やわらかな食感と上品な旨み。シンプルな味付けだからこそ、鶏本来の味を楽しめます。</p></div></div><div class="menu-card"><img src="/food-assets/menu-thigh.jpg" alt="炭火で焼いたもも肉"><div class="menu-card-copy"><span>ジューシーな旨み。</span><h3>もも肉</h3><p>ほどよい脂と濃厚な旨み。炭火の香ばしさが、もも肉のおいしさを引き立てます。</p></div></div><div class="menu-card"><img src="/food-assets/menu-mix.jpg" alt="炭火で焼いたむね肉ともも肉のミックス"><div class="menu-card-copy"><span>ふたつのおいしさ。</span><h3>ミックス</h3><p>むね肉ともも肉を一度に。どちらも楽しみたい方におすすめの一品です。</p></div></div></div></section>
+    <section id="scene" class="scene"><div class="scene-copy reveal"><p class="en">SUMIBI</p><h2>目の前の炭と、<br>向き合って焼く。</h2><p>火力も、煙も、その日の炭の状態も同じではありません。網の上の鶏を見ながら、炭火ならではの香りと焼き目をまとわせます。</p></div><div class="photos"><img src="/food-assets/grilling1.jpg" alt="炭火で鶏を焼く様子"><img src="/food-assets/grilling2.jpg" alt="キッチンカーで炭火焼をする様子"><img src="/food-assets/fire.jpg" alt="炎が上がる炭火焼"></div></section>
+    <section id="contact" class="contact reveal"><img src="/food-assets/logo.png" alt="いぶり"><h2>炭火の香りを、街角へ。</h2><p>出店情報・イベント出店・フランチャイズについての情報は、順次こちらでお知らせします。</p><a href="mailto:#{h(contact_email(site['contact_email']))}?subject=#{CGI.escape('いぶりへのお問い合わせ')}">お問い合わせ</a></section>
   </main>
+  <footer>© #{COPYRIGHT_YEAR} 炭火焼鶏 いぶり</footer>
 HTML
 
 write_page('', portal_layout(title: site['site_name'], description: 'NCPの飲食事業とサッカー事業をご案内します。', path: '/', body: portal_body))
 write_page('soccer', layout(site, title: 'サッカー事業', description: site['description'], path: '/soccer/', body: soccer_body))
-write_page('food', portal_layout(title: "飲食事業 | #{site['site_name']}", description: 'NCPの飲食事業をご案内します。', path: '/food/', body: food_body))
+write_page('food', food_layout(title: "炭火焼鶏 いぶり | #{site['site_name']}", description: '銘柄鶏を昆布だしと塩だけで味付けし、炭火で焼き上げるキッチンカー「いぶり」。', body: food_body))
 
 [['news', 'NEWS', news], ['topic', 'TOPIC', topics]].each do |directory, title, entries|
   intro = title == 'NEWS' ? '大会・イベントの最新情報' : 'サッカーを支える人とチームのストーリー'
