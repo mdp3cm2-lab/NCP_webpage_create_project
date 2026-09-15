@@ -51,6 +51,16 @@ else
   failures << 'missing dist/_headers'
 end
 
+htaccess_path = File.join(dist, '.htaccess')
+if File.file?(htaccess_path)
+  htaccess = File.read(htaccess_path, encoding: 'UTF-8')
+  failures << '.htaccess: missing static DirectoryIndex' unless htaccess.include?('DirectoryIndex index.html')
+  failures << '.htaccess: missing HTTPS redirect' unless htaccess.include?('https://ncptokyo.net%{REQUEST_URI}')
+  failures << '.htaccess: missing Content-Security-Policy' unless htaccess.include?('Content-Security-Policy')
+else
+  failures << 'missing dist/.htaccess'
+end
+
 oversized = Dir[File.join(dist, '**', '*')].select { |file| File.file?(file) && File.size(file) > 25 * 1024 * 1024 }
 failures.concat(oversized.map { |file| "oversized output: #{file.delete_prefix("#{dist}/")}" })
 

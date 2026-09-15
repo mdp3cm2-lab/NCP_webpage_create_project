@@ -16,6 +16,7 @@ MAX_STATIC_FILE_SIZE = 25 * 1024 * 1024
 COPYRIGHT_YEAR = '2025'
 FOOD_COPYRIGHT_YEAR = '2026'
 ASSET_VERSION = '20260915-1'
+GOOGLE_SITE_VERIFICATION = '5ABLHMd90YL_9vMOqIfUCPyV55g74OTmi0kus27bDDM'
 LOGO_PATH = '/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png'
 ALLOWED_CONTENT_ELEMENTS = %w[
   a b blockquote br div em figcaption figure h2 h3 h4 i img li mark ol p s span strong
@@ -188,8 +189,10 @@ end
 def copy_public_tree(source, destination)
   skipped = []
   Find.find(source) do |path|
+    next if path == source
+
     relative = path.delete_prefix("#{source}/")
-    next if relative.empty?
+    raise "Unable to resolve public path: #{path}" if relative == path || relative.empty?
     if File.basename(path).start_with?('.')
       Find.prune if File.directory?(path)
       next
@@ -301,6 +304,7 @@ def document_head(title:, description:, path:)
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>#{h(title)}</title>
       <meta name="description" content="#{h(description)}">
+      <meta name="google-site-verification" content="#{GOOGLE_SITE_VERIFICATION}">
       <link rel="canonical" href="#{h(canonical)}">
       <meta property="og:title" content="#{h(title)}">
       <meta property="og:description" content="#{h(description)}">
@@ -352,6 +356,7 @@ def food_layout(title:, description:, body:)
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>#{h(title)}</title>
       <meta name="description" content="#{h(description)}">
+      <meta name="google-site-verification" content="#{GOOGLE_SITE_VERIFICATION}">
       <link rel="canonical" href="#{canonical}">
       <meta property="og:title" content="#{h(title)}">
       <meta property="og:description" content="#{h(description)}">
@@ -401,6 +406,7 @@ FileUtils.cp(File.join(ROOT, 'source', 'style.css'), File.join(DIST, 'assets', '
 FileUtils.cp(File.join(ROOT, 'source', 'main.js'), File.join(DIST, 'assets', 'main.js'))
 FileUtils.cp(File.join(ROOT, 'source', 'food.css'), File.join(DIST, 'assets', 'food.css'))
 FileUtils.cp(File.join(ROOT, 'source', 'food.js'), File.join(DIST, 'assets', 'food.js'))
+FileUtils.cp(File.join(ROOT, 'source', 'conoha.htaccess'), File.join(DIST, '.htaccess'))
 public_root = File.join(ROOT, 'public')
 skipped_large_files = Dir.exist?(public_root) ? copy_public_tree(public_root, DIST) : []
 

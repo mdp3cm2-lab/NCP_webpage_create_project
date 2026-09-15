@@ -1,4 +1,5 @@
 dist/
 .DS_Store
 tmp/
+release/
 ncp.WordPress.*.xml

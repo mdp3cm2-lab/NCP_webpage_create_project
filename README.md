@@ -40,3 +40,14 @@ Cloudflare Pagesの設定値:
 - Root directory: 未指定（リポジトリ直下）
 
 初回公開後に発行される`https://<project-name>.pages.dev`を確認用URLとして共有します。これは`ncptokyo.net`の公開内容やDNSを変更しません。
+
+## Manual deployment to ConoHa WING
+
+本番サーバーではRubyやPHPを実行せず、`dist/`の内容だけを公開します。
+
+1. `ruby scripts/build.rb`と`ruby scripts/verify.rb`を実行する
+2. 現行サイトのファイル、`.htaccess`、データベースをバックアップする
+3. `dist/`の中身を`/public_html/ncptokyo.net/`へFTPでアップロードする
+4. トップ、記事、画像、動画、問い合わせリンクを確認する
+
+`dist/.htaccess`はConoHa用です。WordPressの`.htaccess`と置き換える前に、元のファイルを必ず保存してください。
