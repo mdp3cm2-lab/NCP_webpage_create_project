@@ -117,7 +117,10 @@ def validate_articles!(articles)
   reserved_paths = %w[assets contact food news partners soccer sns topic uploads we-are]
   slugs = articles.map { |article| article['slug'].to_s.strip }
   raise 'Every article requires a slug.' if slugs.any?(&:empty?)
-  invalid_slugs = slugs.reject { |slug| slug.length <= 100 && slug.match?(/\A[\p{L}\p{N}_\-！]+\z/u) }
+  invalid_slugs = slugs.reject do |slug|
+    segments = slug.split('/')
+    slug.length <= 120 && segments.length <= 2 && segments.all? { |segment| segment.match?(/\A[a-z0-9][a-z0-9_-]*\z/) }
+  end
   raise "Invalid article slugs: #{invalid_slugs.join(', ')}" unless invalid_slugs.empty?
 
   duplicates = slugs.group_by(&:itself).select { |_slug, values| values.length > 1 }.keys
@@ -467,7 +470,7 @@ soccer_body = <<~HTML
     <div class="section-title"><h2>EVENT SCHEDULE</h2><p>大会・イベント情報</p></div>
     <div class="schedule-track">
       <article class="schedule-card schedule-card--next"><p class="schedule-label">NEXT EVENT</p><div class="schedule-date"><strong>10.10</strong><span>SAT<br>2026</span></div><h3>第3回ユニックカップ<br>U-9 サッカー大会</h3><p>#{h(site['event_place'])}</p><a href="#{h(event_link)}">大会情報</a></article>
-      <article class="schedule-card"><p class="schedule-label">EVENT REPORT</p><div class="schedule-date"><strong>3.28</strong><span>SAT<br>2026</span></div><h3>第2回ユニックカップ</h3><p>Smile Sports Park</p><a href="/第2回ユニック杯開催/">開催レポート</a></article>
+      <article class="schedule-card"><p class="schedule-label">EVENT REPORT</p><div class="schedule-date"><strong>3.28</strong><span>SAT<br>2026</span></div><h3>第2回ユニックカップ</h3><p>Smile Sports Park</p><a href="/news/unic-cup-2026-report/">開催レポート</a></article>
       <article class="schedule-card"><p class="schedule-label">EVENT REPORT</p><div class="schedule-date"><strong>5.03</strong><span>SAT<br>2025</span></div><h3>第1回ユニックカップ<br>U-9 サッカー大会</h3><p>フッティーパーク印西</p><a href="/post-2/">開催レポート</a></article>
     </div>
   </section>
