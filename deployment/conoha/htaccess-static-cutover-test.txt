@@ -1,0 +1,10 @@
+# BEGIN NCP static site redirects
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^第３回ユニックカップu-9サッカー大会開催決定/?$ /news/unic-cup-u9-2026/ [R=302,L]
+RewriteRule ^第2回ユニック杯開催/?$ /news/unic-cup-2026-report/ [R=302,L]
+RewriteRule ^ヴァンラーレ八戸j2昇格/?$ /news/vanraure-hachinohe-j2/ [R=302,L]
+RewriteRule ^第2回ユニック杯開催決定！！/?$ /news/unic-cup-2026-announcement/ [R=302,L]
+RewriteRule ^息栖sss/?$ /topic/ikisu-sss/ [R=302,L]
+</IfModule>
+# END NCP static site redirects
