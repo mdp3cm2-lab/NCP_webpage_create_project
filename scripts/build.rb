@@ -212,6 +212,7 @@ def nav
     <header class="site-header" data-header>
       <div class="header-inner">
         <a class="brand" href="/soccer/" aria-label="サッカー事業 ホーム"><img src="#{LOGO_PATH}" alt="NCP"></a>
+        <a class="business-top-link" href="/" aria-label="事業選択トップへ戻る"><span aria-hidden="true">←</span> 事業TOP</a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
           <span></span><span></span><span></span><span class="sr-only">メニュー</span>
         </button>
