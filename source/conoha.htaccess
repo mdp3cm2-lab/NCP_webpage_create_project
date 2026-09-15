@@ -11,7 +11,7 @@ Options -Indexes
 
   # Disable legacy WordPress entry points after the static site is installed.
   RewriteRule ^(?:wp-admin|wp-includes)(?:/|$) - [R=404,L]
-  RewriteRule ^(?:wp-login\.php|xmlrpc\.php|wp-config\.php)$ - [R=404,L]
+  RewriteRule \.php$ - [R=404,L,NC]
 </IfModule>
 
 <IfModule mod_headers.c>
