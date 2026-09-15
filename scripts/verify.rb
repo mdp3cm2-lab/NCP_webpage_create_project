@@ -19,6 +19,10 @@ html_files.each do |file|
   failures << "#{relative_file}: inline event handler" if html.match?(/\son[a-z]+\s*=/i)
   failures << "#{relative_file}: javascript URL" if html.match?(/javascript\s*:/i)
 
+  html.scan(/\b(?:href|poster|src)=(['"])(\/uploads\/.*?)\1/i).each do |_quote, asset_url|
+    failures << "#{relative_file}: non-ASCII upload URL #{asset_url}" unless asset_url.ascii_only?
+  end
+
   html.scan(/<[^>]+\starget=(['"])_blank\1[^>]*>/i) do
     tag = Regexp.last_match(0)
     rel = tag[/\srel=(['"])(.*?)\1/i, 2].to_s.split

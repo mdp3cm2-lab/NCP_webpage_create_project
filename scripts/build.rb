@@ -4,6 +4,7 @@
 
 require 'cgi'
 require 'date'
+require 'digest'
 require 'fileutils'
 require 'find'
 require 'rexml/document'
@@ -210,6 +211,35 @@ def copy_public_tree(source, destination)
     end
   end
   skipped
+end
+
+def normalize_static_asset_urls!
+  aliases = {}
+  attribute_pattern = /(?<prefix>\b(?:href|poster|src)=(?<quote>['"]))(?<url>\/uploads\/[^'"?#]+)(?<suffix>\k<quote>)/
+
+  Dir[File.join(DIST, '**', '*.html')].each do |html_path|
+    html = File.read(html_path, encoding: 'UTF-8')
+    rewritten = html.gsub(attribute_pattern) do
+      raw_url = Regexp.last_match[:url]
+      next Regexp.last_match[0] if raw_url.ascii_only?
+
+      source = File.join(ROOT, 'public', raw_url.delete_prefix('/'))
+      raise "Missing referenced asset: #{raw_url}" unless File.file?(source)
+
+      alias_url = aliases[raw_url] ||= begin
+        extension = File.extname(source).downcase
+        digest = Digest::SHA256.file(source).hexdigest[0, 16]
+        "/media/#{digest}#{extension}"
+      end
+      destination = File.join(DIST, alias_url.delete_prefix('/'))
+      FileUtils.mkdir_p(File.dirname(destination))
+      FileUtils.cp(source, destination) unless File.exist?(destination)
+      "#{Regexp.last_match[:prefix]}#{alias_url}#{Regexp.last_match[:suffix]}"
+    end
+    File.write(html_path, rewritten) if rewritten != html
+  end
+
+  warn "Created #{aliases.length} ASCII media aliases for FTP compatibility." unless aliases.empty?
 end
 
 def nav
@@ -611,6 +641,7 @@ sitemap = %(<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.si
           urls.map { |url| "  <url><loc>https://ncptokyo.net#{h(url)}</loc></url>" }.join("\n") +
           "\n</urlset>\n"
 File.write(File.join(DIST, 'sitemap.xml'), sitemap)
+normalize_static_asset_urls!
 
 unless skipped_large_files.empty?
   generated_files = Dir[File.join(DIST, '**', '*.{html,css,js,xml,txt}')]
