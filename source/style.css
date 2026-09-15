@@ -302,6 +302,7 @@ a.partner-card:hover img { transform: scale(1.035); }
 .business-choice-logo img { width: min(68%, 330px); max-height: 310px; object-fit: contain; transition: transform .4s ease; }
 .business-choice--food .business-choice-logo img { background: white; box-shadow: 0 18px 50px rgba(0,0,0,.22); }
 .business-choice--soccer .business-choice-logo img { width: min(76%, 390px); }
+.business-choice--soccer h2 { font-size: clamp(2.2rem, 4.2vw, 4.5rem); white-space: nowrap; }
 .business-choice:hover .business-choice-logo img { transform: scale(1.025); }
 .business-choice-copy { position: relative; z-index: 1; max-width: 520px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.3); }
 .business-choice span { margin-bottom: 8px; color: #ff3131; font-family: "Barlow Condensed", sans-serif; font-size: .82rem; font-weight: 800; letter-spacing: .18em; }
@@ -332,6 +333,7 @@ a.partner-card:hover img { transform: scale(1.035); }
   .business-choice--soccer .business-choice-logo img { width: min(78%, 300px); }
   .business-choice-copy { padding-top: 22px; }
   .business-choice h2 { font-size: 2.7rem; }
+  .business-choice--soccer h2 { font-size: clamp(1.75rem, 7.6vw, 2.7rem); }
   .business-choice p { margin: 12px 0 22px; font-size: .82rem; }
   .portal-footer { padding: 13px 20px; }
   .placeholder-logo { top: 14px; left: 18px; width: 96px; height: 66px; }
