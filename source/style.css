@@ -75,13 +75,14 @@ button { font: inherit; }
 .social-section { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1180px; margin: auto; padding: 80px 30px; }
 .social-section > div { min-width: 0; }
 .social-section h2 { margin: 0 0 20px; color: var(--navy); font-size: 1.55rem; font-weight: 500; }
-.social-panel { padding: 28px; border: 1px solid #e3e5ec; border-radius: 4px; background: white; box-shadow: 0 8px 26px rgba(0,10,90,.07); }
+.social-panel { display: flex; flex-direction: column; padding: 28px; border: 1px solid #e3e5ec; border-radius: 4px; background: white; box-shadow: 0 8px 26px rgba(0,10,90,.07); }
 .social-panel > p { min-height: 2em; margin: -10px 0 22px; color: #666b76; font-size: .82rem; }
 .instagram-profile-crop { height: clamp(330px, 38vw, 430px); overflow: hidden; border: 1px solid #e3e5ec; background: #f5f5f5; }
 .instagram-profile-embed { width: 150%; height: 720px; border: 0; background: white; }
 .youtube-embed { position: relative; overflow: hidden; aspect-ratio: 16/9; background: #000; }
+.instagram-profile-crop, .youtube-embed { margin-bottom: 18px; }
 .youtube-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.social-link { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; padding: 14px 16px; color: white; background: var(--navy); font-size: .76rem; font-weight: 700; letter-spacing: .04em; }
+.social-link { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding: 14px 16px; color: white; background: var(--navy); font-size: .76rem; font-weight: 700; letter-spacing: .04em; }
 .social-panel--instagram .social-link { background: linear-gradient(100deg, #7c3aed, #db2777, #f97316); }
 .social-link span { font-size: 1rem; }
 .page-hero { min-height: 280px; padding: 78px 30px 65px; color: white; background: var(--navy); text-align: center; }
