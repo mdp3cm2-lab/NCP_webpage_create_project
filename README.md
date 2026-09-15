@@ -26,3 +26,16 @@ ruby scripts/build.rb
 
 CMSの設定は `.pages.yml` にあります。
 
+## Fixed preview (Cloudflare Pages)
+
+GitHubの`main`ブランチをCloudflare Pagesへ接続すると、Pages CMSやローカルから変更をpushするたびに固定プレビューURLが自動更新されます。
+
+Cloudflare Pagesの設定値:
+
+- Framework preset: `None`
+- Production branch: `main`
+- Build command: `ruby scripts/build.rb`
+- Build output directory: `dist`
+- Root directory: 未指定（リポジトリ直下）
+
+初回公開後に発行される`https://<project-name>.pages.dev`を確認用URLとして共有します。これは`ncptokyo.net`の公開内容やDNSを変更しません。
