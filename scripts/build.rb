@@ -5,10 +5,12 @@
 require 'cgi'
 require 'date'
 require 'fileutils'
+require 'find'
 require 'yaml'
 
 ROOT = File.expand_path('..', __dir__)
 DIST = File.join(ROOT, 'dist')
+MAX_STATIC_FILE_SIZE = 25 * 1024 * 1024
 
 def load_yaml(path)
   YAML.safe_load(File.read(path, encoding: 'UTF-8'), [Date, Time], [], true) || {}
@@ -51,6 +53,25 @@ def write_page(path, contents)
   absolute = File.join(DIST, path, 'index.html')
   FileUtils.mkdir_p(File.dirname(absolute))
   File.write(absolute, contents)
+end
+
+def copy_public_tree(source, destination)
+  skipped = []
+  Find.find(source) do |path|
+    relative = path.delete_prefix("#{source}/")
+    next if relative.empty?
+
+    target = File.join(destination, relative)
+    if File.directory?(path)
+      FileUtils.mkdir_p(target)
+    elsif File.size(path) > MAX_STATIC_FILE_SIZE
+      skipped << relative
+    else
+      FileUtils.mkdir_p(File.dirname(target))
+      FileUtils.cp(path, target)
+    end
+  end
+  skipped
 end
 
 def nav
@@ -186,8 +207,8 @@ FileUtils.rm_rf(DIST)
 FileUtils.mkdir_p(File.join(DIST, 'assets'))
 FileUtils.cp(File.join(ROOT, 'source', 'style.css'), File.join(DIST, 'assets', 'style.css'))
 FileUtils.cp(File.join(ROOT, 'source', 'main.js'), File.join(DIST, 'assets', 'main.js'))
-public_files = Dir[File.join(ROOT, 'public', '*')]
-FileUtils.cp_r(public_files, DIST) unless public_files.empty?
+public_root = File.join(ROOT, 'public')
+skipped_large_files = Dir.exist?(public_root) ? copy_public_tree(public_root, DIST) : []
 
 latest_news = news.first(4).map { |entry| card(entry, 'NEWS') }.join
 latest_topics = topics.first(3).map { |entry| card(entry, 'TOPIC') }.join
@@ -400,5 +421,16 @@ sitemap = %(<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.si
           urls.map { |url| "  <url><loc>https://ncptokyo.net#{h(url)}</loc></url>" }.join("\n") +
           "\n</urlset>\n"
 File.write(File.join(DIST, 'sitemap.xml'), sitemap)
+
+unless skipped_large_files.empty?
+  generated_files = Dir[File.join(DIST, '**', '*.{html,css,js,xml,txt}')]
+  referenced_large_files = skipped_large_files.select do |path|
+    needle = "/#{path}".b
+    generated_files.any? { |generated_path| File.binread(generated_path).include?(needle) }
+  end
+  raise "Oversized static files are referenced by generated pages: #{referenced_large_files.join(', ')}" unless referenced_large_files.empty?
+
+  warn "Skipped #{skipped_large_files.length} unused files larger than 25 MiB: #{skipped_large_files.join(', ')}"
+end
 
 puts "Built #{urls.length} pages in dist/."
