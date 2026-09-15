@@ -406,7 +406,6 @@ FileUtils.cp(File.join(ROOT, 'source', 'style.css'), File.join(DIST, 'assets', '
 FileUtils.cp(File.join(ROOT, 'source', 'main.js'), File.join(DIST, 'assets', 'main.js'))
 FileUtils.cp(File.join(ROOT, 'source', 'food.css'), File.join(DIST, 'assets', 'food.css'))
 FileUtils.cp(File.join(ROOT, 'source', 'food.js'), File.join(DIST, 'assets', 'food.js'))
-FileUtils.cp(File.join(ROOT, 'source', 'conoha.htaccess'), File.join(DIST, '.htaccess'))
 public_root = File.join(ROOT, 'public')
 skipped_large_files = Dir.exist?(public_root) ? copy_public_tree(public_root, DIST) : []
 

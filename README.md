@@ -50,4 +50,4 @@ Cloudflare Pagesの設定値:
 3. `dist/`の中身を`/public_html/ncptokyo.net/`へFTPでアップロードする
 4. トップ、記事、画像、動画、問い合わせリンクを確認する
 
-`dist/.htaccess`はConoHa用です。WordPressの`.htaccess`と置き換える前に、元のファイルを必ず保存してください。
+`.htaccess`はサーバー環境によって利用可能な設定が異なるため、既存ファイルを保存し、動作確認済みの内容だけを個別に反映します。
