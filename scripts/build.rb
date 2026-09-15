@@ -487,8 +487,8 @@ portal_body = <<~HTML
       <a class="business-choice business-choice--soccer" href="/soccer/">
         <div class="business-choice-logo"><img src="#{LOGO_PATH}" alt="NCP"></div>
         <div class="business-choice-copy">
-          <span>SOCCER BUSINESS</span>
-          <h2>サッカー事業</h2>
+          <span>SPORTS PROMOTION</span>
+          <h2>スポーツ推進事業</h2>
           <p>大会・イベントを通じて、子どもたちの挑戦を支える。</p>
           <b>VIEW BUSINESS <i>→</i></b>
         </div>
@@ -515,7 +515,7 @@ food_body = <<~HTML
   <footer>© #{FOOD_COPYRIGHT_YEAR} 炭火焼鶏 いぶり</footer>
 HTML
 
-write_page('', portal_layout(title: site['site_name'], description: 'NCPの飲食事業とサッカー事業をご案内します。', path: '/', body: portal_body))
+write_page('', portal_layout(title: site['site_name'], description: 'NCPの飲食事業とスポーツ推進事業をご案内します。', path: '/', body: portal_body))
 write_page('soccer', layout(site, title: 'サッカー事業', description: site['description'], path: '/soccer/', body: soccer_body))
 write_page('food', food_layout(title: "炭火焼鶏 いぶり | #{site['site_name']}", description: '銘柄鶏を昆布だしと塩だけで味付けし、炭火で焼き上げるキッチンカー「いぶり」。', body: food_body))
 
