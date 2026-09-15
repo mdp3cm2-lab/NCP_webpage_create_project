@@ -15,6 +15,7 @@ DIST = File.join(ROOT, 'dist')
 MAX_STATIC_FILE_SIZE = 25 * 1024 * 1024
 COPYRIGHT_YEAR = '2025'
 FOOD_COPYRIGHT_YEAR = '2026'
+ASSET_VERSION = '20260915-1'
 LOGO_PATH = '/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png'
 ALLOWED_CONTENT_ELEMENTS = %w[
   a b blockquote br div em figcaption figure h2 h3 h4 i img li mark ol p s span strong
@@ -249,7 +250,7 @@ def footer(site)
       <div class="footer-links">#{social.join}</div>
       <small>© #{COPYRIGHT_YEAR} NCP</small>
     </footer>
-    <script src="/assets/main.js" defer></script>
+    <script src="/assets/main.js?v=#{ASSET_VERSION}" defer></script>
   HTML
 end
 
@@ -308,7 +309,7 @@ def document_head(title:, description:, path:)
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Noto+Sans+JP:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="/assets/style.css">
+      <link rel="stylesheet" href="/assets/style.css?v=#{ASSET_VERSION}">
     </head>
   HTML
 end
@@ -356,8 +357,8 @@ def food_layout(title:, description:, body:)
       <meta property="og:description" content="#{h(description)}">
       <meta property="og:type" content="website">
       <meta property="og:url" content="#{canonical}">
-      <link rel="stylesheet" href="/assets/food.css">
-      <script src="/assets/food.js"></script>
+      <link rel="stylesheet" href="/assets/food.css?v=#{ASSET_VERSION}">
+      <script src="/assets/food.js?v=#{ASSET_VERSION}"></script>
     </head>
     <body>
       #{body}
