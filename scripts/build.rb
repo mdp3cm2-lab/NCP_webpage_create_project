@@ -118,6 +118,29 @@ def footer(site)
   HTML
 end
 
+def social_section(site)
+  <<~HTML
+    <section class="social-section">
+      <div class="social-panel social-panel--instagram">
+        <h2><span>|</span> INSTAGRAM</h2>
+        <p>最新の投稿をInstagramからお届けします。</p>
+        <div class="instagram-profile-crop">
+          <iframe class="instagram-profile-embed" src="https://www.instagram.com/ncptokyo.net_official/embed/" title="NCP TOKYO Instagram 最新投稿" loading="lazy" scrolling="no" allowtransparency="true"></iframe>
+        </div>
+        <a class="social-link" href="#{h(site['instagram_url'])}" target="_blank" rel="noreferrer">Instagramでもっと見る <span>→</span></a>
+      </div>
+      <div class="social-panel social-panel--youtube">
+        <h2><span>|</span> YOUTUBE</h2>
+        <p>NCPの大会・活動動画をご覧いただけます。</p>
+        <div class="youtube-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/ZHj4lp83VuA?start=1&amp;rel=0" title="NCP TOKYO YouTube動画" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <a class="social-link" href="#{h(site['youtube_url'])}" target="_blank" rel="noreferrer">YouTubeチャンネルを見る <span>→</span></a>
+      </div>
+    </section>
+  HTML
+end
+
 def layout(site, title:, description:, path:, body:)
   site_name = site['site_name'] || 'NCP'
   full_title = title == site_name ? title : "#{title} | #{site_name}"
@@ -262,10 +285,7 @@ soccer_body = <<~HTML
     <div class="center"><a class="legacy-button legacy-button--navy" href="/topic/">一覧を見る</a></div>
   </section>
 
-  <section class="social-section">
-    <div><h2><span>|</span> INSTAGRAM</h2><p>大会や活動の様子をInstagramで発信しています。</p><a class="legacy-button" href="#{h(site['instagram_url'])}" target="_blank" rel="noreferrer">Instagramを見る</a></div>
-    <div><h2><span>|</span> YOU TUBE</h2><video controls poster="/uploads/2025/10/2025-10-29-21.17.53.jpg"><source src="/uploads/2025/11/サッカーハイライト-３.mp4" type="video/mp4"></video></div>
-  </section>
+  #{social_section(site)}
 
   <section class="home-partners" aria-labelledby="home-partners-title">
     <h2 id="home-partners-title">PARTNERS</h2>
@@ -387,7 +407,7 @@ write_page('partners', layout(site, title: 'PARTNERS', description: 'NCPのパ�
 
 sns_body = <<~HTML
   <section class="page-hero"><p class="eyebrow">NCP OFFICIAL</p><h1>SNS</h1><p>InstagramとYouTubeで活動の様子をお届けします。</p></section>
-  <section class="social-section"><div><h2><span>|</span> INSTAGRAM</h2><a class="legacy-button" href="#{h(site['instagram_url'])}" target="_blank" rel="noreferrer">Instagramを見る</a></div><div><h2><span>|</span> YOU TUBE</h2><video controls poster="/uploads/2025/10/2025-10-29-21.17.53.jpg"><source src="/uploads/2025/11/サッカーハイライト-３.mp4" type="video/mp4"></video></div></section>
+  #{social_section(site)}
 HTML
 write_page('sns', layout(site, title: 'SNS', description: 'NCP公式SNS', path: '/sns/', body: sns_body))
 
