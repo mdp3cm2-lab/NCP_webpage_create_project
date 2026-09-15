@@ -122,7 +122,7 @@ def social_section(site)
   <<~HTML
     <section class="social-section">
       <div class="social-panel social-panel--instagram">
-        <h2><span>|</span> INSTAGRAM</h2>
+        <h2>INSTAGRAM</h2>
         <p>最新の投稿をInstagramからお届けします。</p>
         <div class="instagram-profile-crop">
           <iframe class="instagram-profile-embed" src="https://www.instagram.com/ncptokyo.net_official/embed/" title="NCP TOKYO Instagram 最新投稿" loading="lazy" scrolling="no" allowtransparency="true"></iframe>
@@ -130,7 +130,7 @@ def social_section(site)
         <a class="social-link" href="#{h(site['instagram_url'])}" target="_blank" rel="noreferrer">Instagramでもっと見る <span>→</span></a>
       </div>
       <div class="social-panel social-panel--youtube">
-        <h2><span>|</span> YOUTUBE</h2>
+        <h2>YOUTUBE</h2>
         <p>NCPの大会・活動動画をご覧いただけます。</p>
         <div class="youtube-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/ZHj4lp83VuA?start=1&amp;rel=0" title="NCP TOKYO YouTube動画" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
