@@ -32,9 +32,11 @@ button { font: inherit; }
 .legacy-slider { position: relative; width: min(100% - 6vw, 1330px); aspect-ratio: 16/8.4; margin: auto; overflow: hidden; background: #17364a; box-shadow: 0 8px 22px rgba(0,0,0,.08); }
 .legacy-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s ease; }
 .legacy-slide.is-active { opacity: 1; }
-.slider-arrow { position: absolute; z-index: 2; top: 50%; width: 52px; height: 76px; color: white; background: rgba(0,10,110,.32); border: 0; font-size: 3rem; line-height: 1; transform: translateY(-50%); cursor: pointer; }
-.slider-arrow--prev { left: 0; }
-.slider-arrow--next { right: 0; }
+.slider-arrow { position: absolute; z-index: 2; top: 50%; width: 44px; height: 44px; padding: 0; color: white; background: rgba(2,11,44,.28); border: 0; border-radius: 50%; font-size: 2rem; line-height: 1; opacity: .75; transform: translateY(-50%); transition: background .2s ease, opacity .2s ease; cursor: pointer; }
+.slider-arrow:hover { background: rgba(2,11,44,.65); opacity: 1; }
+.slider-arrow:focus-visible { outline: 2px solid white; outline-offset: 2px; opacity: 1; }
+.slider-arrow--prev { left: 12px; }
+.slider-arrow--next { right: 12px; }
 .event-band { position: relative; z-index: 1; min-height: 245px; padding: 26px 24px 48px; overflow: hidden; color: white; background: var(--navy); text-align: center; }
 .event-band::before, .event-band::after { position: absolute; z-index: -1; left: -3%; width: 106%; height: 48%; content: ""; background: var(--red); transform: skewY(-4deg); }
 .event-band::before { top: -31%; }
@@ -158,7 +160,6 @@ body { overflow-x: hidden; background: #fff; }
 .legacy-hero { padding: 0; background: #070b1c; }
 .legacy-slider { width: min(100%, 1240px); aspect-ratio: 16/9; box-shadow: none; }
 .legacy-slide { object-fit: contain; }
-.slider-arrow { width: 44px; height: 70px; background: rgba(0,10,110,.82); border-radius: 4px; font-size: 2.4rem; }
 .slider-thumbs { display: flex; gap: 7px; justify-content: center; min-height: 58px; padding: 8px 20px; background: white; }
 .slider-thumbs button { width: 92px; height: 42px; padding: 0; overflow: hidden; background: #ddd; border: 3px solid transparent; border-radius: 4px; cursor: pointer; }
 .slider-thumbs button.is-active { border-color: var(--red); }
