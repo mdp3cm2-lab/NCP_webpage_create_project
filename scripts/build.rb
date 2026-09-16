@@ -338,6 +338,8 @@ def document_head(title:, description:, path:)
       <title>#{h(title)}</title>
       <meta name="description" content="#{h(description)}">
       <meta name="google-site-verification" content="#{GOOGLE_SITE_VERIFICATION}">
+      <link rel="icon" type="image/jpeg" href="/favicon-20260916.jpg">
+      <link rel="apple-touch-icon" href="/favicon-20260916.jpg">
       <link rel="canonical" href="#{h(canonical)}">
       <meta property="og:title" content="#{h(title)}">
       <meta property="og:description" content="#{h(description)}">
@@ -390,6 +392,8 @@ def food_layout(title:, description:, body:)
       <title>#{h(title)}</title>
       <meta name="description" content="#{h(description)}">
       <meta name="google-site-verification" content="#{GOOGLE_SITE_VERIFICATION}">
+      <link rel="icon" type="image/jpeg" href="/favicon-20260916.jpg">
+      <link rel="apple-touch-icon" href="/favicon-20260916.jpg">
       <link rel="canonical" href="#{canonical}">
       <meta property="og:title" content="#{h(title)}">
       <meta property="og:description" content="#{h(description)}">
