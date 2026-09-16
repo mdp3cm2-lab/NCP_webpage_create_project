@@ -16,7 +16,7 @@ DIST = File.join(ROOT, 'dist')
 MAX_STATIC_FILE_SIZE = 25 * 1024 * 1024
 COPYRIGHT_YEAR = '2025'
 FOOD_COPYRIGHT_YEAR = '2026'
-ASSET_VERSION = '20260916-1'
+ASSET_VERSION = '20260916-2'
 GOOGLE_SITE_VERIFICATION = '5ABLHMd90YL_9vMOqIfUCPyV55g74OTmi0kus27bDDM'
 LOGO_PATH = '/uploads/2026/08/260607_ncp_210_297_mm_堤_川上_ロゴ作成_01.png'
 ALLOWED_CONTENT_ELEMENTS = %w[
@@ -625,7 +625,7 @@ contact_body = <<~HTML
   <section class="contact-section">
     <div class="contact-intro">
       <p class="eyebrow">CONTACT US</p>
-      <h2>一緒に、新しい舞台を。</h2>
+      <h2><span>一緒に、</span><span>新しい舞台を。</span></h2>
       <p>イベントの企画・運営、動画やグッズ制作、パートナーシップについて承ります。以下の項目をご入力ください。</p>
       <div class="contact-direct"><span>MAIL</span><a href="mailto:#{h(contact_email)}">#{h(contact_email)}</a></div>
     </div>
