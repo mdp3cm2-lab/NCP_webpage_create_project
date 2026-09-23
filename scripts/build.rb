@@ -249,7 +249,7 @@ def nav
   <<~HTML
     <header class="site-header" data-header>
       <div class="header-inner">
-        <a class="brand" href="/soccer/" aria-label="サッカー事業 ホーム"><img src="#{LOGO_PATH}" alt="NCP"></a>
+        <a class="brand" href="/soccer/" aria-label="スポーツ推進事業 ホーム"><img src="#{LOGO_PATH}" alt="NCP"></a>
         <a class="business-top-link" href="/" aria-label="事業選択トップへ戻る"><span aria-hidden="true">←</span> 事業TOP</a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
           <span></span><span></span><span></span><span class="sr-only">メニュー</span>
@@ -559,7 +559,7 @@ food_body = <<~HTML
 HTML
 
 write_page('', portal_layout(title: site['site_name'], description: 'NCPの飲食事業とスポーツ推進事業をご案内します。', path: '/', body: portal_body))
-write_page('soccer', layout(site, title: 'サッカー事業', description: site['description'], path: '/soccer/', body: soccer_body))
+write_page('soccer', layout(site, title: 'スポーツ推進事業', description: site['description'], path: '/soccer/', body: soccer_body))
 write_page('food', food_layout(title: "炭火焼鶏 いぶり | #{site['site_name']}", description: '銘柄鶏を昆布だしと塩だけで味付けし、炭火で焼き上げるキッチンカー「いぶり」。', body: food_body))
 
 [['news', 'NEWS', news], ['topic', 'TOPIC', topics]].each do |directory, title, entries|
